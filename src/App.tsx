@@ -22,7 +22,7 @@ const App = () => {
   const [isLoading, setLoader] = useState<boolean>(false);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState<ImageType | null>();
+  const [selectedImage, setSelectedImage] = useState<ImageType | null >(null);
 
   useEffect(() => {
     if (!query) return;
