@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { ModalImage } from "../../types";
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -16,7 +17,13 @@ const customStyles = {
   },
 };
 
-export const ImageModal = ({ isModalOpen, closeModal, selectedImage }) => {
+type Props = {
+  isModalOpen: boolean;
+  closeModal: () => void;
+  selectedImage: ModalImage;
+}
+
+export const ImageModal = ({ isModalOpen, closeModal, selectedImage }: Props) => {
   return (
     <div>
       <Modal
@@ -25,7 +32,7 @@ export const ImageModal = ({ isModalOpen, closeModal, selectedImage }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <img src={selectedImage?.regular} alt={selectedImage?.description} />
+        <img src={selectedImage?.regular} alt={selectedImage?.alt_description} />
       </Modal>
     </div>
   );

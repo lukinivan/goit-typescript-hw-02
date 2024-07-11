@@ -1,8 +1,13 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import css from "./SearchBar.module.css";
 import * as Yup from "yup";
 
-const initialsValue = {
+interface SearchBarValues {
+  text: string;
+}
+
+// Початкові значення
+const initialValues: SearchBarValues = {
   text: "",
 };
 
@@ -10,8 +15,13 @@ const validationSchema = Yup.object({
   text: Yup.string().required("Please, write your request."),
 });
 
-export const SearchBar = ({ onSubmit }) => {
-  const handleSubmit = (value, action) => {
+type Props = {
+  onSubmit: (value: string) => void
+}
+
+export const SearchBar = ({ onSubmit }: Props) => {
+  const handleSubmit = (value: SearchBarValues,
+    action: FormikHelpers<SearchBarValues>) => {
     onSubmit(value.text);
     action.resetForm();
   };
@@ -21,7 +31,7 @@ export const SearchBar = ({ onSubmit }) => {
       <div className={css.form}>
         <Formik
           validationSchema={validationSchema}
-          initialValues={initialsValue}
+          initialValues={initialValues}
           onSubmit={handleSubmit}
           className={css.form}
         >

@@ -11,16 +11,18 @@ import {
 import { getImages } from "./service/unsplashApi";
 
 import toast, { Toaster } from "react-hot-toast";
+import { ImageType, ModalImage } from "./types";
+
 
 const App = () => {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [images, setImage] = useState([]);
-  const [showLoadMore, setShowLoadMore] = useState(false);
-  const [isLoading, setLoader] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [images, setImages] = useState<ImageType[]>([]);
+  const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
+  const [isLoading, setLoader] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ModalImage| null>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -37,10 +39,14 @@ const App = () => {
           return;
         }
 
-        setImage((prev) => [...prev, ...images]);
+        setImages((prev) => [...prev, ...images]);
         setShowLoadMore(page < totalPages);
-      } catch (error) {
-        notify(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          notify(error.message);
+        } else {
+          notify("An unexpected error occurred.");
+        }
       } finally {
         setLoader(false);
       }
@@ -48,9 +54,9 @@ const App = () => {
     getData();
   }, [query, page]);
 
-  const onSubmit = (query) => {
+  const onSubmit = (query: string) => {
     setQuery(query);
-    setImage([]);
+    setImages([]);
     setPage(1);
     setShowLoadMore(false);
     setIsEmpty(false);
@@ -60,7 +66,7 @@ const App = () => {
     setPage((prev) => prev + 1);
   };
 
-  const handleOpenModal = (largeImage) => {
+  const handleOpenModal = (largeImage: ModalImage) => {
     setIsModalOpen(true);
     setSelectedImage(largeImage);
   };
@@ -70,7 +76,7 @@ const App = () => {
     setSelectedImage(null);
   };
 
-  const notify = (errorMessage) => toast.error(errorMessage);
+  const notify = (errorMessage: string) => toast.error(errorMessage);
 
   return (
     <>

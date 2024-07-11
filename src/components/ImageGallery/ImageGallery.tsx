@@ -1,7 +1,15 @@
+import { ImageType, ModalImage } from "../../types";
 import { ImageCard } from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
-export const ImageGallery = ({ images, openModal }) => {
+
+
+type Props = {
+  images: ImageType[];
+  openModal: (modalImage: ModalImage) => void;
+}
+
+export const ImageGallery = ({ images, openModal }: Props) => {
   return (
     <ul className={css.list}>
       {images.map((image) => (
