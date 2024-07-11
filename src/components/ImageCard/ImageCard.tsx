@@ -1,22 +1,21 @@
-import { ImageType, ModalImage } from "../../types";
+import { ImageType } from "../../types";
 import css from "./ImageCard.module.css";
 
 
 
-type Props = {
-  regular: string;
-  small: string;
-  alt_description: string;
-  openModal: (modalImage: ModalImage) => void;
+interface Props {
+  image: ImageType;
+  openModal: (image: ImageType) => void;
 }
 
-export const ImageCard = ({ regular, small, alt_description, openModal }: Props) => {
+export const ImageCard: React.FC<Props> = ({ image, openModal }) => {
+  
   return (
     <div className={css.imageCard}>
       <img
-        src={small}
-        alt={alt_description}
-        onClick={() => openModal({ regular, alt_description })}
+        src={image.urls.small}
+        alt={image.alt_description}
+        onClick={() => openModal(image)}
       />
     </div>
   );

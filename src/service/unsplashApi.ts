@@ -33,20 +33,3 @@ export const getImages = async (query: string, page: number): Promise<{ images: 
     throw new Error("Failed to fetch images from Unsplash API."); 
   }
 };
-
-// export const getImages = async (query: string, page: number) => {
-//   const { data } = await axios.get("/search/photos", {
-//     params: {
-//       client_id: "JQpHbQDnF_EZQssfDG5Gsbj0N4Gq2Q80Yi0DqM79H6g",
-//       query,
-//       page,
-//       per_page: 20,
-//       orientation: "landscape",
-//     },
-//   });
-
-//   const images = transformResults(data.results);
-//   console.log(images);
-  
-//   return { images, totalImages: data.total, totalPages: data.total_pages };
-// };

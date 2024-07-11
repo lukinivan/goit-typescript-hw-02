@@ -15,11 +15,11 @@ const validationSchema = Yup.object({
   text: Yup.string().required("Please, write your request."),
 });
 
-type Props = {
+interface SearchBarProps {
   onSubmit: (value: string) => void
 }
 
-export const SearchBar = ({ onSubmit }: Props) => {
+export const SearchBar: React.FC<SearchBarProps>  = ({ onSubmit }) => {
   const handleSubmit = (value: SearchBarValues,
     action: FormikHelpers<SearchBarValues>) => {
     onSubmit(value.text);

@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import { ModalImage } from "../../types";
+import { ImageType } from "../../types";
 Modal.setAppElement("#root");
 
 const customStyles = {
@@ -17,13 +17,13 @@ const customStyles = {
   },
 };
 
-type Props = {
+interface ImageModalProps {
   isModalOpen: boolean;
   closeModal: () => void;
-  selectedImage: ModalImage;
+  selectedImage: ImageType | null;
 }
 
-export const ImageModal = ({ isModalOpen, closeModal, selectedImage }: Props) => {
+export const ImageModal: React.FC<ImageModalProps> = ({ isModalOpen, closeModal, selectedImage }) => {
   return (
     <div>
       <Modal
@@ -32,7 +32,7 @@ export const ImageModal = ({ isModalOpen, closeModal, selectedImage }: Props) =>
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <img src={selectedImage?.regular} alt={selectedImage?.alt_description} />
+        <img src={selectedImage?.urls.regular} alt={selectedImage?.alt_description} />
       </Modal>
     </div>
   );

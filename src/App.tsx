@@ -11,7 +11,7 @@ import {
 import { getImages } from "./service/unsplashApi";
 
 import toast, { Toaster } from "react-hot-toast";
-import { ImageType, ModalImage } from "./types";
+import { ImageType} from "./types";
 
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
   const [isLoading, setLoader] = useState<boolean>(false);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState<ModalImage| null>(null);
+  const [selectedImage, setSelectedImage] = useState<ImageType | null>();
 
   useEffect(() => {
     if (!query) return;
@@ -66,7 +66,7 @@ const App = () => {
     setPage((prev) => prev + 1);
   };
 
-  const handleOpenModal = (largeImage: ModalImage) => {
+  const handleOpenModal = (largeImage: ImageType) => {
     setIsModalOpen(true);
     setSelectedImage(largeImage);
   };
