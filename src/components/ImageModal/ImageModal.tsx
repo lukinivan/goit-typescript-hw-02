@@ -23,7 +23,11 @@ interface ImageModalProps {
   selectedImage: ImageType | null;
 }
 
-export const ImageModal: React.FC<ImageModalProps> = ({ isModalOpen, closeModal, selectedImage }) => {
+export const ImageModal: React.FC<ImageModalProps> = ({
+  isModalOpen,
+  closeModal,
+  selectedImage,
+}) => {
   return (
     <div>
       <Modal
@@ -32,7 +36,10 @@ export const ImageModal: React.FC<ImageModalProps> = ({ isModalOpen, closeModal,
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <img src={selectedImage?.urls.regular} alt={selectedImage?.alt_description} />
+        <img
+          src={selectedImage?.urls.regular}
+          alt={selectedImage?.alt_description}
+        />
       </Modal>
     </div>
   );
